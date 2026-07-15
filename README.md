@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ShowGuard
 
-## Getting Started
+Confirm. Predict. Rescue. Nurture. — an appointment show-rate platform for GoHighLevel-connected contractors.
 
-First, run the development server:
+This repo is currently a **project scaffold**: folder structure, data model, and stub modules that mirror the phased roadmap. No pillar logic is implemented yet.
+
+## Stack
+
+- Next.js (App Router, TypeScript)
+- Tailwind CSS
+- Prisma + PostgreSQL
+- pnpm
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
+cp .env.example .env   # fill in DATABASE_URL and GHL credentials
+pnpm prisma migrate dev --name init
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+  app/
+    dashboard/            risk board (green/yellow/red) placeholder
+    api/webhooks/ghl/     inbound GoHighLevel webhook (appointment.created, etc.)
+    api/webhooks/sms/     inbound SMS reply webhook — must catch every YES/STOP
+  lib/
+    ghl/client.ts         GoHighLevel API client (OAuth, SMS send) — stub
+    pillars/
+      confirm.ts          Pillar 1 — confirmation sequence + reply handling
+      predict.ts          Pillar 2 — risk scoring (rules now, ML in v2)
+      rescue.ts           Pillar 3 — at-risk appointment recovery
+      nurture.ts          Pillar 4 — pre/post-visit nurture sequences
+    prisma.ts             Prisma client singleton
+prisma/
+  schema.prisma           Client, Contact, Appointment, Message, Outcome
+```
 
-## Learn More
+## Roadmap context
 
-To learn more about Next.js, take a look at the following resources:
+See the product roadmap for the full phased plan (Version 1 go-to-market →
+Version 2 ML brain → Version 3 white-label). The one thing every wave
+depends on: **outcome capture must be correct from the first live
+appointment** — see the `Outcome` model in `prisma/schema.prisma`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Learn more
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Prisma Documentation](https://www.prisma.io/docs)

@@ -1,33 +1,15 @@
 {
-  "name": "showguard",
-  "version": "0.1.0",
+  "name": "showguard-workspace",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint",
-    "format": "prettier --write .",
-    "prisma:generate": "prisma generate",
-    "prisma:migrate": "prisma migrate dev"
-  },
-  "dependencies": {
-    "@prisma/client": "^6.19.3",
-    "next": "16.2.10",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "dev": "concurrently \"pnpm --filter showguard-frontend dev\" \"pnpm --filter showguard-backend dev\"",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "format": "prettier --write ."
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.10",
-    "prettier": "^3.9.5",
-    "prettier-plugin-tailwindcss": "^0.8.0",
-    "prisma": "^6.19.3",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "concurrently": "^8.2.2",
+    "prettier": "^3.9.5"
   }
 }

@@ -3,6 +3,7 @@ import calendarImg from "../../assets/calender.png";
 import datatrackingImg from "../../assets/datatracking.png";
 import { PipelineModal } from "../components/PipelineModal";
 import { PIPELINE_STAGES } from "../constants/dashboardData";
+import { Tooltip } from "../components/ui/Tooltip";
 import {
   ArrowPathIcon,
   SparklesIcon,
@@ -16,6 +17,7 @@ import {
   ChevronRightIcon,
   EllipsisVerticalIcon,
   LightBulbIcon,
+  InformationCircleIcon,
 } from "@heroicons/react/24/outline";
 
 export const Dashboard: React.FC = () => {
@@ -38,6 +40,17 @@ export const Dashboard: React.FC = () => {
     console.log("[DASHBOARD] Refreshing Operations Center...");
     setTimeout(() => setIsRefreshing(false), 800);
   };
+
+  const liveLogsTooltipContent = (
+    <div className="flex flex-col gap-1.5 text-[11px] text-zinc-300 font-sans text-left">
+      <p className="font-bold text-[#fffefb] text-xs">Live Guard Agent Logs</p>
+      <p>Tracks and monitors webhook calls, automated data synchronization, and security logs in real time.</p>
+      <div className="border-t border-zinc-800 my-1"></div>
+      <p><strong className="text-primary font-semibold">Events Today:</strong> Sync triggers, calendar sync updates, and webhook actions processed today.</p>
+      <p><strong className="text-rose-400 font-semibold">Blocked:</strong> Intercepted unauthorized integrations, spam attempts, or API authentication failures.</p>
+      <p><strong className="text-primary font-semibold">Uptime:</strong> Operational health and availability of the GoHighLevel webhook tracking agent.</p>
+    </div>
+  );
 
   return (
     <div className="flex-1 bg-canvas text-body p-6 flex flex-col gap-6 min-h-screen">
@@ -334,9 +347,14 @@ export const Dashboard: React.FC = () => {
 
               {/* Section Header */}
               <div className="flex justify-between items-center py-4 px-5 border-b border-ink/10 bg-canvas-soft/40">
-                <span className="text-xs font-bold text-ink font-display uppercase tracking-wider">
-                  Live Logs
-                </span>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-xs font-bold text-ink font-display uppercase tracking-wider">
+                    Live Logs
+                  </span>
+                  <Tooltip content={liveLogsTooltipContent} position="top">
+                    <InformationCircleIcon className="w-4 h-4 text-body-mid hover:text-ink transition-colors cursor-help" />
+                  </Tooltip>
+                </div>
                 <span className="text-[9px] font-bold bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 py-0.5 px-2.5 rounded-full flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
                   <span>Live</span>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import calendarImg from "../../assets/calender.png";
-import datatrackingImg from "../../assets/datatracking.png";
+import calendarImg from "../assets/calender.png";
+import datatrackingImg from "../assets/datatracking.png";
 import { PipelineModal } from "../components/PipelineModal";
 import { PIPELINE_STAGES } from "../constants/dashboardData";
 import { Tooltip } from "../components/ui/Tooltip";

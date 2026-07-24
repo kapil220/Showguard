@@ -5,7 +5,6 @@ import {
   Squares2X2Icon,
   CalendarIcon,
   ChartBarIcon,
-  CpuChipIcon,
   RocketLaunchIcon,
   Cog6ToothIcon,
   ArrowRightStartOnRectangleIcon,
@@ -20,7 +19,6 @@ export const Sidebar: React.FC = () => {
     { name: "Dashboard", path: "/dashboard", icon: Squares2X2Icon },
     { name: "Appointments", path: "/appointments", icon: CalendarIcon },
     { name: "Analytics", path: "/analytics", icon: ChartBarIcon },
-    { name: "Intelligence", path: "/intelligence", icon: CpuChipIcon },
     { name: "Go Live", path: "/go-live", icon: RocketLaunchIcon },
     { name: "Settings", path: "/settings", icon: Cog6ToothIcon },
   ];

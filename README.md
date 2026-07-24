@@ -27,22 +27,29 @@ showguard/
 │   ├── vite.config.ts    # Proxies "/api" to backend port 3001
 │   └── src/
 │       ├── main.tsx      # Entrypoint (initializes AuthProvider)
-│       ├── App.tsx       # Core Routing Setup (Login, Signup, Reset, etc.)
+│       ├── App.tsx       # Core Routing Setup (Login, Signup, Appointments, Analytics, etc.)
 │       ├── index.css     # Global styles & native Tailwind CSS v4 @theme config
+│       ├── assets/       # Static image illustrations (calender.png, appointmentCalender.png, etc.)
+│       ├── constants/
+│       │   └── uiStyles.ts# Shared design system utility classes & tokens
 │       ├── context/
 │       │   └── AuthContext.tsx    # Session management & network request helpers
 │       ├── components/
 │       │   ├── ProtectedRoute.tsx # Route guard wrapper
+│       │   ├── Sidebar.tsx        # Global navigation drawer
+│       │   ├── NewAppointmentModal.tsx # Appointment creation form modal
 │       │   └── ui/
-│       │       ├── Button.tsx     # Custom button component (DESIGN.md)
-│       │       ├── Card.tsx       # Content card frame (DESIGN.md)
+│       │       ├── Button.tsx     # Custom button component
+│       │       ├── Card.tsx       # Content card frame
 │       │       └── Input.tsx      # Text input with built-in password toggle
 │       └── pages/
 │           ├── Login.tsx          # Login form
 │           ├── Signup.tsx         # Account registration form
 │           ├── ForgotPassword.tsx # Simulates password-reset emails
 │           ├── ResetPassword.tsx  # Resets password using secure tokens
-│           └── Dashboard.tsx      # Protected home view
+│           ├── Dashboard.tsx      # Protected home view & pipeline tracking
+│           ├── Appointments.tsx   # Appointment workspace (Table, Search, Filter & Modal)
+│           └── Analytics.tsx      # Analytics dashboard (Risk scores, trend metrics & charts)
 └── backend/              # Express API server
     ├── package.json
     ├── prisma/
@@ -79,8 +86,11 @@ Here is a simple breakdown of how the existing codebase is built and behaves:
 
 ### 2. UI Components & Styling
 - Driven by a unified cream/coffee color palette and typography scale from `DESIGN.md` built directly into Tailwind v4's native `@theme` block.
+- **Design Tokens (`uiStyles.ts`)**: Centralizes UI class abstractions for input fields, buttons, tab pill containers, and search inputs to maintain consistent styling across all application modules.
+- **Appointments Module (`/appointments`)**: Features a clean appointment table with search filtering across names, emails, and phone numbers, status tab filters (*Upcoming*, *Past*, *All*), a custom `appointmentCalender.png` empty state graphic, and an integrated `NewAppointmentModal` dialog for adding records.
+- **Analytics Module (`/analytics`)**: Provides operational visibility with summary metric cards, status breakdown visualization, risk score gauge displays, and 7-day show-rate trends.
 - **Custom Input Component**: Features a built-in eye icon toggle using `Heroicons` to easily show or hide passwords. The eye icon uses a light, faded style that highlights on hover.
-- **Responsive Layouts**: Form screens adapt beautifully across mobile viewports up to a clean `28rem` (448px) container width.
+- **Responsive Layouts**: Form screens adapt beautifully across mobile viewports up to desktop widths.
 
 ---
 
